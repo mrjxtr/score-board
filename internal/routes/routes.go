@@ -20,6 +20,8 @@ func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
 	fileserver := http.FileServer(http.Dir("./static"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fileserver))
 
+	r.Get("/", h.Home.GetHome)
+
 	r.Route("/", func(r chi.Router) {
 		r.Get("/board", h.Board.GetScoreBoard)
 	})

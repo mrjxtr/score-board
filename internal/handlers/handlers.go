@@ -4,6 +4,7 @@ import "github.com/mrjxtr-dev/score-board/internal/store"
 
 type Handlers struct {
 	Board *ScoreBoardHandler
+	Home  *HomeHandler
 }
 
 func NewHandlers(db store.Database) *Handlers {
