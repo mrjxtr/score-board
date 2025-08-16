@@ -1,13 +1,11 @@
 package templates
 
-templ Index(name string) {
-	<div>
-		Welcome to the { name } Score Board
-	</div>
-}
-
-templ GuestIndex() {
-	<div>
-		Welcome to the Score Board
+templ Home() {
+	<div class="flex items-center justify-center h-full text-center text-white">
+		<a href="/board" class="text-8xl font-bold cursor-pointer hover:text-yellow-400">
+			WELCOME TO
+			<br/>
+			THE SCORE BOARD
+		</a>
 	</div>
 }

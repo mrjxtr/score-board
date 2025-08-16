@@ -1,0 +1,6 @@
+/* Custom CSS rules go in here */
+@import 'tailwindcss';
+
+body {
+  background: #111827;
+}

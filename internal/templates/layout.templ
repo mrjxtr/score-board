@@ -1,25 +1,54 @@
 package templates
 
+import "time"
+import "strconv"
+
 templ header(title string) {
 	<head>
 		<title>{ title }</title>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="stylesheet" href="/static/css/style.css"/>
 	</head>
 }
 
 templ footer() {
-	<footer class="bg-primary-600 p-4"></footer>
+	<footer class="bg-primary-600 p-6">
+		<div class="flex flex-col items-center justify-center space-y-2 text-center">
+			<span class="text-white text-sm">
+				&copy; { strconv.Itoa(time.Now().Year()) } Score Board
+			</span>
+			<span class="text-white text-sm">
+				fueled by ☕️ made with 🤍 by
+				<a
+					href="https://github.com/mrjxtr"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-yellow-400 hover:text-yellow-200 transition-colors duration-200 font-medium"
+				>
+					&#64;mrjxtr | Jester Lumacad
+				</a>
+			</span>
+		</div>
+	</footer>
 }
 
 templ nav() {
+	<nav class="text-white p-4">
+		<span class="text-5xl font-bold cursor-pointer hover:text-yellow-400 pr-4">
+			<a href="/">Score Board</a>
+		</span>
+		<a href="/ping">ping</a>
+	</nav>
 }
 
 templ Layout(contents templ.Component, title string) {
 	@header(title)
 	<body class="flex flex-col h-full">
-		@nav()
-		<main class="flex-1 container ">
+		if title != "Home" {
+			@nav()
+		}
+		<main class="flex-1">
 			@contents
 		</main>
 		@footer()
