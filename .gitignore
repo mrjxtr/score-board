@@ -1,2 +1,7 @@
+tmp/
+bin/
+
 *_test.go
 .env
+
+tailwindcss
