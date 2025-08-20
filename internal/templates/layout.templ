@@ -24,7 +24,7 @@ templ footer() {
 					href="https://github.com/mrjxtr"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-yellow-400 hover:text-yellow-200 transition-colors duration-200 font-medium"
+					class="text-yellow-400 hover:text-yellow-200 duration-200 font-medium"
 				>
 					&#64;mrjxtr | Jester Lumacad
 				</a>
@@ -34,11 +34,11 @@ templ footer() {
 }
 
 templ nav() {
-	<nav class="text-white p-4">
-		<span class="text-5xl font-bold cursor-pointer hover:text-yellow-400 pr-4">
-			<a href="/">Score Board</a>
+	<nav class="text-white font-bold p-4 text-xl">
+		<span class="text-3xl cursor-pointer hover:text-yellow-400 duration-200 pr-4">
+			<a href="/">SCORE BOARD</a>
 		</span>
-		<a href="/ping">ping</a>
+		<a href="/about" class="hover:text-yellow-400 duration-200">ABOUT</a>
 	</nav>
 }
 
@@ -48,7 +48,7 @@ templ Layout(contents templ.Component, title string) {
 		if title != "Home" {
 			@nav()
 		}
-		<main class="flex-1">
+		<main class="flex-1 p-4">
 			@contents
 		</main>
 		@footer()

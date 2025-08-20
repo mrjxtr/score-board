@@ -26,3 +26,12 @@ func (h *HomeHandler) GetHome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func (h *HomeHandler) GetAbout(w http.ResponseWriter, r *http.Request) {
+	c := templates.About()
+	err := templates.Layout(c, "About").Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}

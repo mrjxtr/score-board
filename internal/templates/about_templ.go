@@ -8,7 +8,7 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Home() templ.Component {
+func About() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +29,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex items-center justify-center h-full text-center text-white\"><a href=\"/board\" class=\"text-9xl font-bold cursor-pointer hover:text-yellow-400 duration-200\">WELCOME TO<br>THE SCORE BOARD</a></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex items-center justify-center h-full text-center text-white\"><div><h1 class=\"text-6xl font-bold pb-10\">About Score Board</h1><p class=\"text-xl mb-4\">A simple score tracking application</p><p class=\"text-xl mb-4\">Built with <span class=\"text-yellow-400 font-bold\">Go</span>,  <span class=\"text-yellow-400 font-bold\">Templ</span>, and  <span class=\"text-yellow-400 font-bold\">HTMX</span></p><p class=\"text-xl mb-8\">Created by <a href=\"https://github.com/mrjxtr\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-yellow-400 hover:text-yellow-200 duration-200 font-bold\">&#64;mrjxtr</a></p><a href=\"/board\" class=\"text-3xl font-bold cursor-pointer hover:text-yellow-400 duration-200\">Start Scoring</a></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
