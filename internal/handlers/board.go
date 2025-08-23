@@ -31,7 +31,7 @@ func (h *ScoreBoardHandler) GetScoreBoard(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	c := templates.Board()
+	c := templates.Board(b)
 	err := templates.Layout(c, "Score Board").Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -108,6 +108,8 @@ func (h *ScoreBoardHandler) PostNewBoard(w http.ResponseWriter, r *http.Request)
 
 	_ = os.MkdirAll("./data", 0755)
 	_ = b.SaveToJSON(filepath.Join("./data", "db.json"))
+	// reload store so next /board reflects saved data
+	h.store = store.LoadBoard(filepath.Join("./data", "db.json"))
 
 	http.Redirect(w, r, "/board", http.StatusSeeOther)
 }

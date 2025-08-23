@@ -1,5 +1,23 @@
 package templates
 
-templ Board() {
-	<div></div>
+import "github.com/mrjxtr-dev/score-board/internal/store"
+
+// Board shows the scoreboard with chunky 2x2 team cards — nice and big.
+templ Board(b *store.ScoreBoard) {
+	<section class="max-w-6xl mx-auto text-white">
+		<h1 class="text-8xl font-extrabold mb-8 text-center uppercase">{ b.BoardName }</h1>
+		<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:60px;">
+			for _, t := range b.Teams {
+				<a href="#" class="block no-underline" style="border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,.05);">
+					<div class="p-10" style={ "border-left:18px solid " + t.TeamColor["color"] }>
+						<div class="flex items-center justify-between mb-4">
+							<h2 class="text-5xl font-extrabold uppercase">{ t.TeamName }</h2>
+							<span class="text-2xl opacity-80">TOTAL</span>
+						</div>
+						<div class="text-9xl font-black leading-none">{ t.TotalScore() }</div>
+					</div>
+				</a>
+			}
+		</div>
+	</section>
 }

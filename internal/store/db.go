@@ -17,8 +17,8 @@ type ScoreBoard struct {
 type Team struct {
 	TeamName  string            `json:"team"`
 	TeamColor map[string]string `json:"color"`
-	Members   []string          `json:"members"`
-	Games     []Game            `json:"games"`
+	Members   []string          `json:"members,omitempty"`
+	Games     []Game            `json:"games,omitempty"`
 }
 
 // Game represents a game
@@ -148,4 +148,16 @@ func (b *ScoreBoard) SaveToJSON(filename string) error {
 	}
 
 	return nil
+}
+
+// TotalScore returns the sum of all round scores across all games for this team.
+// If there are no games or rounds, it simply returns 0.
+func (t *Team) TotalScore() int {
+	total := 0
+	for _, g := range t.Games {
+		for _, v := range g.Rounds {
+			total += v
+		}
+	}
+	return total
 }
