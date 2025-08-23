@@ -10,5 +10,6 @@ type Handlers struct {
 func NewHandlers(db store.Database) *Handlers {
 	return &Handlers{
 		Board: NewScoreBoardHandler(db),
+		Home:  NewHomeHandler(db),
 	}
 }

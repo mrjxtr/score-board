@@ -1,0 +1,37 @@
+{
+  "board": "Test",
+  "teams": [
+    {
+      "team": "test1",
+      "color": {
+        "color": "#D50059"
+      },
+      "members": null,
+      "games": null
+    },
+    {
+      "team": "test2",
+      "color": {
+        "color": "#C50000"
+      },
+      "members": null,
+      "games": null
+    },
+    {
+      "team": "test3",
+      "color": {
+        "color": "#1D03AF"
+      },
+      "members": null,
+      "games": null
+    },
+    {
+      "team": "test4",
+      "color": {
+        "color": "#FFBB02"
+      },
+      "members": null,
+      "games": null
+    }
+  ]
+}

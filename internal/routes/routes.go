@@ -25,6 +25,8 @@ func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
 
 	r.Route("/board", func(r chi.Router) {
 		r.Get("/", h.Board.GetScoreBoard)
+		r.Get("/new", h.Board.GetNewBoard)
+		r.Post("/new", h.Board.PostNewBoard)
 	})
 	return r
 }
