@@ -23,6 +23,11 @@ func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
 	r.Get("/", h.Home.GetHome)
 	r.Get("/about", h.Home.GetAbout)
 
+	// Settings: edit/update board and reset
+	r.Get("/settings", h.Board.GetSettings)
+	r.Post("/settings", h.Board.PostSettings)
+	r.Post("/settings/reset", h.Board.PostResetBoard)
+
 	r.Route("/board", func(r chi.Router) {
 		r.Get("/", h.Board.GetScoreBoard)
 		r.Get("/new", h.Board.GetNewBoard)

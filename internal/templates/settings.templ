@@ -1,0 +1,45 @@
+package templates
+
+import (
+    "strconv"
+    "github.com/mrjxtr-dev/score-board/internal/store"
+)
+
+// Settings shows a simple edit form for the board and a reset button.
+templ Settings(b *store.ScoreBoard) {
+    <section class="max-w-3xl mx-auto text-white">
+        <h1 class="text-5xl font-bold mb-4">Settings</h1>
+        <form id="settings-form" method="post" action="/settings" class="space-y-6">
+            <div>
+                <label class="block mb-2">Board name</label>
+                <input name="board_name" value={ b.BoardName } class="p-4 w-full text-white" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;" placeholder="e.g. Champions"/>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Teams (up to 4)</h2>
+                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+                    for i := 1; i <= 4; i++ {
+                        <div style="padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.03);" class="space-y-2">
+                            <h3 class="text-xl font-bold" style="display:flex;align-items:center;gap:8px;">
+                                Team
+                                <span style={ "display:inline-block;width:18px;height:18px;border-radius:9999px;background:" + DefaultColorHex(i) + ";border:1px solid rgba(255,255,255,.2);" } title={ DefaultColorHex(i) } aria-label="team color"></span>
+                            </h3>
+                            <input name={ "team_name_" + strconv.Itoa(i) } value={ TeamNameAt(b, i-1) } class="p-4 w-full text-white" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;" placeholder="Team name"/>
+                            <textarea name={ "team_members_" + strconv.Itoa(i) } class="p-4 w-full h-24 text-white" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;" placeholder="Members (comma-separated, optional)">{ TeamMembersCSVAt(b, i-1) }</textarea>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </form>
+
+        <div class="mt-4" style="display:flex;align-items:center;gap:12px;">
+            <button type="submit" form="settings-form" class="p-4 bg-yellow-400 text-black font-bold cursor-pointer" style="border-radius:10px;">Save</button>
+            <form method="post" action="/settings/reset">
+                <button type="submit" class="p-4 bg-red-500 text-white font-bold cursor-pointer" style="border-radius:10px;">Reset board</button>
+            </form>
+        </div>
+    </section>
+}
+
+
