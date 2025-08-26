@@ -2,6 +2,7 @@
 package config
 
 import (
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -24,12 +25,17 @@ var DefaulColors = map[string]string{
 }
 
 func LoadConfig() *Config {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	if err := godotenv.Load(); err != nil {
-		panic("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
 
 	return &Config{
-		PORT: os.Getenv("PORT"),
+		PORT: port,
 		Defaults: Defaults{
 			Colors: DefaulColors,
 		},

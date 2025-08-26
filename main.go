@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/fs"
 	"log"
 	"net/http"
 
@@ -12,7 +13,14 @@ import (
 func main() {
 	db := store.LoadDB()
 	cfg := config.LoadConfig()
-	r := routes.SetupRoutes(cfg, db)
+
+	// Mount embedded static filesystem if available (from assets.go)
+	var staticFS http.FileSystem
+	if sub, err := fs.Sub(embeddedStatic, "static"); err == nil {
+		staticFS = http.FS(sub)
+	}
+
+	r := routes.SetupRoutes(cfg, db, staticFS)
 
 	server := &http.Server{
 		Addr:    ":" + cfg.PORT,

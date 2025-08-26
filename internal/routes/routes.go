@@ -11,13 +11,21 @@ import (
 	"github.com/mrjxtr-dev/score-board/internal/store"
 )
 
-func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
+// SetupRoutes wires all HTTP routes. If staticFS is non-nil, it will serve
+// files from it at /static/; otherwise it falls back to the local ./static dir.
+func SetupRoutes(cfg *config.Config, db store.Database, staticFS http.FileSystem) *chi.Mux {
 	r := chi.NewRouter()
 	setupGlobalMiddleware(r)
 
 	h := handlers.NewHandlers(db)
 
-	fileserver := http.FileServer(http.Dir("./static"))
+	var fs http.FileSystem
+	if staticFS != nil {
+		fs = staticFS
+	} else {
+		fs = http.Dir("./static")
+	}
+	fileserver := http.FileServer(fs)
 	r.Handle("/static/*", http.StripPrefix("/static/", fileserver))
 
 	r.Get("/", h.Home.GetHome)
