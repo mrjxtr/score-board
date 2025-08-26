@@ -1,0 +1,43 @@
+package templates
+
+import (
+    "github.com/mrjxtr-dev/score-board/internal/store"
+)
+
+// Games shows existing games and a simple form to add a new game.
+templ Games(b *store.ScoreBoard) {
+    <section class="max-w-3xl mx-auto text-white">
+        <h1 class="text-5xl font-bold mb-6">Games</h1>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-2">Existing</h2>
+            if len(UniqueGameNames(b)) == 0 {
+                <p class="opacity-80">No games yet. Add one below.</p>
+            } else {
+                for _, name := range UniqueGameNames(b) {
+                    <div class="mb-2 p-3" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:8px;">
+                        <form method="post" action="/games/rename" style="display:flex;align-items:center;gap:8px;flex:1;">
+                            <input type="hidden" name="old_name" value={ name }/>
+                            <input name="new_name" value={ name } class="p-2 text-white" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;flex:1;"/>
+                            <button type="submit" class="p-2 bg-yellow-400 text-black font-bold cursor-pointer" style="border-radius:8px;">Rename</button>
+                        </form>
+                        <form method="post" action="/games/delete">
+                            <input type="hidden" name="name" value={ name }/>
+                            <button type="submit" class="p-2 bg-red-500 text-white font-bold cursor-pointer" style="border-radius:8px;">Delete</button>
+                        </form>
+                    </div>
+                }
+            }
+        </div>
+
+        <form method="post" action="/games" class="space-y-4">
+            <div>
+                <label class="block mb-2">Game name</label>
+                <input name="game_name" class="p-4 w-full text-white" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;" placeholder="e.g. Basketball"/>
+            </div>
+            <button type="submit" class="p-4 bg-yellow-400 text-black font-bold cursor-pointer" style="border-radius:10px;">Add game</button>
+        </form>
+    </section>
+}
+
+

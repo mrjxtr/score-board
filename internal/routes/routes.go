@@ -23,6 +23,12 @@ func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
 	r.Get("/", h.Home.GetHome)
 	r.Get("/about", h.Home.GetAbout)
 
+	// Games: list/add/rename/delete
+	r.Get("/games", h.Board.GetGames)
+	r.Post("/games", h.Board.PostGames)
+	r.Post("/games/rename", h.Board.PostRenameGame)
+	r.Post("/games/delete", h.Board.PostDeleteGame)
+
 	// Settings: edit/update board and reset
 	r.Get("/settings", h.Board.GetSettings)
 	r.Post("/settings", h.Board.PostSettings)
@@ -32,6 +38,11 @@ func SetupRoutes(cfg *config.Config, db store.Database) *chi.Mux {
 		r.Get("/", h.Board.GetScoreBoard)
 		r.Get("/new", h.Board.GetNewBoard)
 		r.Post("/new", h.Board.PostNewBoard)
+		// Team scores
+		r.Get("/team/{team}", h.Board.GetTeamScores)
+		r.Post("/team/{team}/scores", h.Board.PostTeamScores)
+		r.Post("/team/{team}/scores/bulk", h.Board.PostTeamScoresBulk)
+		r.Post("/team/{team}/scores/delete", h.Board.PostDeleteRound)
 	})
 	return r
 }
