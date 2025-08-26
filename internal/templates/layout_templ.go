@@ -95,6 +95,7 @@ func footer() templ.Component {
 	})
 }
 
+// nav shows the top bar — title left, links right, comfy padding.
 func nav() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -116,7 +117,7 @@ func nav() templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<nav class=\"text-white font-bold p-4 text-xl\"><span class=\"text-3xl cursor-pointer hover:text-yellow-400 duration-200 pr-4\"><a href=\"/\">SCORE BOARD</a></span> <a href=\"/board\" class=\"hover:text-yellow-400 duration-200\">BOARD</a> <span class=\"px-3\">|</span> <a href=\"/games\" class=\"hover:text-yellow-400 duration-200\">GAMES</a> <span class=\"px-3\">|</span> <a href=\"/settings\" class=\"hover:text-yellow-400 duration-200\">SETTINGS</a> <span class=\"px-3\">|</span> <a href=\"/about\" class=\"hover:text-yellow-400 duration-200\">ABOUT</a></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<nav class=\"text-white font-bold text-xl\"><div class=\"max-w-6xl mx-auto flex items-center justify-between px-6 py-4\"><a href=\"/\" class=\"text-3xl cursor-pointer hover:text-yellow-400 duration-200\">SCORE BOARD</a><div class=\"flex items-center\"><a href=\"/board\" class=\"hover:text-yellow-400 duration-200\">BOARD</a> <span class=\"px-3\">|</span> <a href=\"/games\" class=\"hover:text-yellow-400 duration-200\">GAMES</a> <span class=\"px-3\">|</span> <a href=\"/settings\" class=\"hover:text-yellow-400 duration-200\">SETTINGS</a> <span class=\"px-3\">|</span> <a href=\"/about\" class=\"hover:text-yellow-400 duration-200\">ABOUT</a></div></div></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

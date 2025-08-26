@@ -3,5 +3,6 @@ bin/
 
 *_test.go
 .env
+db*
 
 tailwindcss
